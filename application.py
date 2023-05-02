@@ -1,13 +1,10 @@
 from flask import Flask,render_template,request
 import os
-from dotenv import load_dotenv
 import openai
 
 app = Flask(__name__)
 
-load_dotenv()
-
-openai.api_key = os.environ['OPENAI_API_KEY']
+openai.api_key = os.environ.get('$OPENAI_API_KEY')
 
 def chat():
     response = openai.ChatCompletion.create(

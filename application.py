@@ -1,11 +1,29 @@
 from flask import Flask,render_template,request
+import os
+from dotenv import load_dotenv
+import openai
 
 app = Flask(__name__)
+
+load_dotenv()
+
+# openai.organization = 'org-anyhuR01gbjQigb6U9gsVHsM'
+openai.api_key = os.environ['OPENAI_API_KEY']
+
+def chat():
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": "テスラについて教えて"}
+        ]
+    )
+
+    return response.choices[0]["message"]["content"].strip()
 
 @app.route("/", methods=["GET", "POST"])
 def main_page():
     if request.method == 'GET':
-        return "app service is success!"
+        return chat()
     elif request.method == 'POST':
         return "POST is success!"
 

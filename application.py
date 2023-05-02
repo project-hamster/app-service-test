@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 load_dotenv()
 
-# openai.organization = 'org-anyhuR01gbjQigb6U9gsVHsM'
 openai.api_key = os.environ['OPENAI_API_KEY']
 
 def chat():
